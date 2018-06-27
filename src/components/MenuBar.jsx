@@ -49,7 +49,8 @@ class MenuBar extends React.Component {
                 <AppBar position="static" color="default">
                     <Toolbar className={classes.toolbar}>
                         <div className={classes.start}>
-                            <IconButton className={classes.menuButton} aria-label="Menu">
+                            <IconButton className={classes.menuButton} 
+                                        onClick={this.props.onHamburguerClick} aria-label="Menu">
                                 <MenuIcon />
                             </IconButton>
                             <img src={logo} className={classes.logo} alt="logo" />
@@ -67,7 +68,8 @@ class MenuBar extends React.Component {
 }
 
 MenuBar.propTypes = {
-    classes: PropTypes.object.isRequired,
+    classes:            PropTypes.object.isRequired,
+    onHamburguerClick:  PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(MenuBar);

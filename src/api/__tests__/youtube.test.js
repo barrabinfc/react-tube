@@ -1,16 +1,28 @@
 import fetch from 'node-fetch';
 
-import {search} from '../youtube.js'
+import {search, searchRelatedOf} from '../youtube.js'
 
 describe('youtube v3 API', () => {
     it('search', () => {
-        let query   = `gigi masin`
-        return search( query ).then( (results) => {
+        let subject   = `gigi masin`
+        return search( subject ).then( (results) => {
             expect(results.kind).toBe('youtube#searchListResponse')
             expect(results.items.length).toBeGreaterThanOrEqual(0)
 
             let firstResult = results.items[0]
-            console.log(firstResult)
+            expect(firstResult.id).toBeDefined()
+            expect(firstResult.snippet).toBeDefine d()
         })
     })
+    it('related', () => {
+        let videoId = `d4Ws3jTM_cQ`
+        return searchRelatedOf(videoId).then( (results) => {
+            expect(results.kind).toBe('youtube#searchListResponse')
+            expect(results.items.length).toBeGreaterThanOrEqual(0)
+
+            let firstResult = results.items[0]
+            expect(firstResult.id).toBeDefined()
+            expect(firstResult.snippet).toBeDefined()
+        })
+    }) 
 })

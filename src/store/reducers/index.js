@@ -5,7 +5,7 @@ import { PlayerReducer } from './player.js'
 
 const rootReducer = combineReducers({
     'search': SearchReducer,
-    'player': PlayerReducer
+    'player': PlayerReducer,
 })
 
 export default rootReducer

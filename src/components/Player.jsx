@@ -8,24 +8,23 @@ import { withStyles } from '@material-ui/core/styles';
 import Youtube from 'react-youtube';
 import Typography from '@material-ui/core/Typography';
 
-const styleCenterMixin = (opts) => ({...opts, ...{
+const MiddleMixin = (opts) => ({...opts, ...{
     'display': 'flex',
     'align-items': 'center',
     'width': '50%',
     'height': '100%',
     'margin': '0px auto',
-    'color': '#fff',
     'text-align': 'center'
 }})
 
-const styles = {
+const styles = (theme) => ({
     container: {
         position: 'relative',
         'width': '100%',
         'height': 'calc((9 / 16) * 100vw)',
         'max-height': 'calc(100vh - 185px)',
         'min-height': '480px',
-        'background': '#000',
+        'background': theme.palette.primary.dark,
         'display': 'block',
         'justify-content': 'center',
         'align-items': 'center'
@@ -34,9 +33,9 @@ const styles = {
         'width': '100%',
         'height': '100%'
     },
-    empty: styleCenterMixin(),
-    notfound: styleCenterMixin()
-}
+    empty: MiddleMixin({'color': theme.palette.primary.contrastText}),
+    notfound: MiddleMixin({'color': theme.palette.primary.contrastText})
+})
 
 /**
  * A full width player
