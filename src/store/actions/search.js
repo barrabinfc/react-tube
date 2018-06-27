@@ -6,7 +6,6 @@ export const SEARCH_CLEAR    = 'SEARCH_CLEAR'
 export const SEARCH_SELECT   = 'SEARCH_SELECT'
 
 class SearchActions {
-    // URL : GET https://www.googleapis.com/youtube/v3/search
 
     searchClear = () => ({
         type: SEARCH_CLEAR

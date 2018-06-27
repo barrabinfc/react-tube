@@ -5,7 +5,7 @@ import App from '../App.jsx';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  let active = {
+  let player = {
     id: `_fuIMye31Gw`,
     //id: '',
     title: 'Erik Satie - Once Upon A Time In Paris',
@@ -27,7 +27,7 @@ it('renders without crashing', () => {
     thumbnail: 'https://img.youtube.com/vi/_fuIMye31Gw/0.jpg'
   }
 
-  //ReactDOM.render(<App active={active} />, div);
+  //ReactDOM.render(<App player={player} />, div);
   //ReactDOM.unmountComponentAtNode(div);
   expect(true).toBe(true)
 });

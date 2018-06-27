@@ -75,7 +75,7 @@ class Player extends React.Component {
 
         return (
             <div className={classes.container}>
-                { this.props.videoId === undefined ? this.empty() 
+                { this.props.videoId === false ? this.empty() 
                     : (this.props.videoId === '' ? this.notfound() : this.player()) }
             </div>
         )
@@ -84,7 +84,10 @@ class Player extends React.Component {
 
 Player.propTypes = {
     classes: PropTypes.object.isRequired,
-    videoId: PropTypes.string.isRequired
+    videoId: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.string
+    ])
 };
 
 export default withStyles(styles)(Player);

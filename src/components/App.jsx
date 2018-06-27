@@ -17,9 +17,9 @@ import theme from '../styles/theme.js';
 import VideoPropType from './proptypes/Video.js'
 import MenuBar from './MenuBar.jsx';
 import Player from './Player.jsx';
-import RelatedVideosList from './RelatedVideosList.jsx'
+import VideosList from '../containers/VideosList.js'
 
-const drawerWidth = 320;
+const drawerWidth = 420;
 
 const styles = theme => ({
   root: {
@@ -73,6 +73,17 @@ class App extends React.Component {
     this.setState({drawerOpen: !this.state.drawerOpen})
   }
 
+  /** For testing purposes 
+  myDefaultAction = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+
+    console.log("App.jsx defaultAction: ", this.props)
+    (this.props.onDefaultAction && this.props.onDefaultAction() )
+  }
+  */
+
+
   /** Drawer */
   drawer(){
     const { classes } = this.props
@@ -87,14 +98,14 @@ class App extends React.Component {
         }}
       >
         <div className={classes.drawerHeader}>
-          <Typography variant="title" color="inherit" noWrap>Related: </Typography>
+          <Typography variant="title" color="inherit" noWrap>Suggestions: </Typography>
           <IconButton onClick={this.handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
 
         <Divider />
-        <RelatedVideosList />
+        <VideosList />
       </Drawer>
     );
   }
@@ -109,7 +120,8 @@ class App extends React.Component {
         <React.Fragment>
           <CssBaseline />
 
-          <MenuBar onHamburguerClick={this.handleDrawerToggle} />
+          <MenuBar onHamburguerClick={this.handleDrawerToggle} 
+                   onNotificationClick={this.props.onDefaultAction} />
           
           <section className={classes.root}>
 
@@ -117,7 +129,7 @@ class App extends React.Component {
               [classes['contentShift']]: drawerOpen,
               [classes['contentShift-right']]: drawerOpen
             })}>
-                <Player videoId={this.props.active.videoId} />
+                <Player videoId={this.props.player.videoId} />
             </article>
 
             {this.drawer()}
@@ -132,7 +144,8 @@ class App extends React.Component {
 
 App.propTypes = {
     classes: PropTypes.object.isRequired,
-    active:  VideoPropType.isRequired
+    player:  VideoPropType.isRequired,
+    onDefaultAction: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(App);

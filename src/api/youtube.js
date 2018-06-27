@@ -5,32 +5,43 @@
 const API_KEY = 'AIzaSyA84xjydegSxJZz03yxgOG5dB48q0C1DSM'
 
 /** URL Querystring encoding 
- *  note: shallow
+ *  note: params is shallow 
  */
 const urlQS = (url, params) => {
-    let queryParams = Object.keys(params).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
-        .join('&')
+    let queryParams = Object.keys(params)
+                            .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
+                            .join('&')
 
     return new URL(`${url}?${queryParams}`)
+}
+
+/**
+ * Youtube REST Api wrapper.
+ */
+export function youtubeREST(URI='https://www.googleapis.com/youtube/v3/search', opts={}) {
+    const data = {
+        ...opts, ...{
+            key: API_KEY
+        }
+    }
+    let url = urlQS(URI, data)
+    return fetch(url)
+        .then(response => response.json())
 }
 
 /**
  * Youtube Search
  */
 export function search(subject, opts = {q: subject}) {
-    const API_URI = 'https://www.googleapis.com/youtube/v3/search'
     const data = {
         ...opts, ...{
             part: 'snippet',
             type: 'video',
-            key: API_KEY
+            order: 'viewCount'
         }
     }
 
-    let url = urlQS(API_URI, data)
-
-    return fetch(url)
-        .then(response => response.json())
+    return youtubeREST('https://www.googleapis.com/youtube/v3/search', data)
 }
 
 /**
@@ -39,4 +50,17 @@ export function search(subject, opts = {q: subject}) {
  */
 export function searchRelatedOf( videoId ) {
     return search( undefined, {'relatedToVideoId': videoId })
-} 
+}
+
+/**
+ * Retieve detailed info for `videoId`
+ */
+export function details( videoId ) {
+    const data = {
+        part: 'snippet,contentDetails,status,topicDetails,statistics',
+        type: 'video',
+        id: videoId
+    }
+
+    return youtubeREST('https://www.googleapis.com/youtube/v3/videos', data)
+}

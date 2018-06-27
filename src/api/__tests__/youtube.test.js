@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-import {search, searchRelatedOf} from '../youtube.js'
+import {search, searchRelatedOf, details} from '../youtube.js'
 
 describe('youtube v3 API', () => {
     it('search', () => {
@@ -11,7 +11,7 @@ describe('youtube v3 API', () => {
 
             let firstResult = results.items[0]
             expect(firstResult.id).toBeDefined()
-            expect(firstResult.snippet).toBeDefine d()
+            expect(firstResult.snippet).toBeDefined()
         })
     })
     it('related', () => {
@@ -24,5 +24,16 @@ describe('youtube v3 API', () => {
             expect(firstResult.id).toBeDefined()
             expect(firstResult.snippet).toBeDefined()
         })
-    }) 
+    })
+    it('details', () => {
+        let videoId = `clC6cgoh1sU`
+        return details(videoId).then( (results) => {
+            expect(results.kind).toBe('youtube#videoListResponse')
+            expect(results.items.length).toBeGreaterThanOrEqual(0)
+
+            let firstResult = results.items[0]
+            expect(firstResult.id).toBeDefined()
+            expect(firstResult.snippet).toBeDefined()
+        })
+    })
 })

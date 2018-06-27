@@ -1,4 +1,4 @@
-import { SEARCH_CLEAR, SEARCH_REQUEST, SEARCH_RESPONSE } from '../actions/search'
+import { SEARCH_CLEAR, SEARCH_REQUEST, SEARCH_RESPONSE } from '../actions/search.js'
 
 /**
  * Youtube Search reducer

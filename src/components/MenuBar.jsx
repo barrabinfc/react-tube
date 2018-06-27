@@ -57,7 +57,7 @@ class MenuBar extends React.Component {
                         </div>
                         <SearchBar />
                         <div className={classes.end}>
-                            <IconButton ><NotificationIcon /></IconButton>
+                            <IconButton onClick={this.props.onNotificationClick}><NotificationIcon /></IconButton>
                             <IconButton ><AccountIcon /></IconButton>
                         </div>
                     </Toolbar>
@@ -69,7 +69,8 @@ class MenuBar extends React.Component {
 
 MenuBar.propTypes = {
     classes:            PropTypes.object.isRequired,
-    onHamburguerClick:  PropTypes.func.isRequired
+    onHamburguerClick:  PropTypes.func.isRequired,
+    onNotificationClick: PropTypes.func
 };
 
 export default withStyles(styles)(MenuBar);
