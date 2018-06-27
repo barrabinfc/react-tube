@@ -11,7 +11,8 @@ const state2props = (state) => {
 }
 
 const dispatch2props = (dispatch) => ({
-  onDefaultAction: () => {
+  onDefaultAction: (ev) => {
+    ev.preventDefault()
     dispatch(actions.player.goto('_fuIMye31Gw'))
   }
 })

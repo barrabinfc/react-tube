@@ -23,14 +23,16 @@ import VideoDetail from './VideoDetail.jsx';
 import VideosList from '../containers/VideosList.js'
 
 const drawerWidth = 420;
+const menuHeight = 64;
 
 const styles = theme => ({
   root: {
       display: 'flex',
-      zIndex: 1,
       overflow: 'hidden',
       position: 'relative',
       width: '100%',
+      'margin-top': menuHeight,
+      'z-index': 0,
   },
   content: {
       flexGrow: 1,
@@ -45,6 +47,7 @@ const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     width: drawerWidth,
+    'min-height': `calc(100vh - ${menuHeight}px)`,
     height: '100%'
   },
   drawerHeader: {
@@ -132,7 +135,7 @@ class App extends React.Component {
               [classes['contentShift']]: drawerOpen,
               [classes['contentShift-right']]: drawerOpen
             })}>
-                <Player videoId={this.props.player.videoId} />
+                <Player onSampleClick={this.props.onDefaultAction} videoId={this.props.player.videoId} />
                 <VideoDetail video={this.props.player} />
             </article>
 

@@ -1,9 +1,9 @@
 export const MockVideoData = {
     videoId: '_fuIMye31Gw',
     publishedAt: `2015-05-28T09:19:05.000Z`,
-    title:       'Erik Satie - Once Upon A Time In Paris',
-    description: `Erik Satie - Gymnopédie No.1`,
-    channelTitle:      'Estoy Perdida',
+    title:       'Lorem Ipsum',
+    description: `Lorem ipsum dolor sit amet conspectuour`,
+    channelTitle:      'Yayyaynono',
     channelId:         '',        
     thumbnails:   {
         'default': {url: 'https://img.youtube.com/vi/_fuIMye31Gw/0.jpg'},

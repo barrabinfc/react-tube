@@ -5,16 +5,19 @@ import update from 'immutability-helper';
 
 import { withStyles } from '@material-ui/core/styles';
 
-import Youtube from 'react-youtube';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
+import Youtube from 'react-youtube';
 
 const MiddleMixin = (opts) => ({...opts, ...{
     'display': 'flex',
     'align-items': 'center',
-    'width': '50%',
+    'width': '70%',
     'height': '100%',
     'margin': '0px auto',
-    'text-align': 'center'
+    'text-align': 'center',
+    'justify-content': 'center'
 }})
 
 const styles = (theme) => ({
@@ -34,7 +37,16 @@ const styles = (theme) => ({
         'height': '100%'
     },
     empty: MiddleMixin({'color': theme.palette.primary.contrastText}),
-    notfound: MiddleMixin({'color': theme.palette.primary.contrastText})
+    notfound: MiddleMixin({'color': theme.palette.primary.contrastText}),
+    sample: {
+        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        borderRadius: 3,
+        border: 0,
+        color: 'white',
+        height: 48,
+        padding: '0 30px',
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    },
 })
 
 /**
@@ -47,7 +59,8 @@ class Player extends React.Component {
         return (
         <div className={classes.empty}>
             <Typography variant="display2" color="inherit">
-                Use the search box above to find your video
+                Start by selecting a <Button onClick={this.props.onSampleClick} className={classes.sample}>example</Button><br/>
+                or use the search box above.
             </Typography>
         </div>)
     }
@@ -87,7 +100,8 @@ Player.propTypes = {
     videoId: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.string
-    ])
+    ]),
+    onSampleClick: PropTypes.func
 };
 
 export default withStyles(styles)(Player);

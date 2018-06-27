@@ -7,10 +7,9 @@ import { withStyles } from '@material-ui/core/styles';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 
-import Divider from '@material-ui/core/Divider';
+import Grow from '@material-ui/core/Grow';
+
 import Typography from '@material-ui/core/Typography';
 
 import VideoCard from './VideoCard.jsx';
@@ -44,11 +43,12 @@ class VideosList extends React.Component {
     }
     
     item( data , i ) {
-        console.log("rendering listitem ", i, data)
         return (
-            <ListItem key={i}>
-                <VideoCard onClick={() => this.cardClick(data.videoId)} video={data} />
-            </ListItem>
+            <Grow in={true} key={i} timeout={i*233}>
+                <ListItem key={i}>
+                        <VideoCard onClick={() => this.cardClick(data.videoId)} video={data} />
+                </ListItem>
+            </Grow> 
         )
     }
 

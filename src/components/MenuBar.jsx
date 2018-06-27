@@ -45,8 +45,10 @@ class MenuBar extends React.Component {
     render(){
         const { classes } = this.props;
         return (
-            <div className={classes.root}>
-                <AppBar position="static" color="default">
+            //<div className={classes.root}>
+                <AppBar color="default"> 
+                    {//position="static" color="default">
+                    }
                     <Toolbar className={classes.toolbar}>
                         <div className={classes.start}>
                             <IconButton className={classes.menuButton} 
@@ -62,7 +64,7 @@ class MenuBar extends React.Component {
                         </div>
                     </Toolbar>
                 </AppBar>
-            </div>
+            //</div>
         );
     }
 }

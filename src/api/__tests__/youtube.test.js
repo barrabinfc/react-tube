@@ -32,6 +32,7 @@ describe('youtube v3 API', () => {
             expect(results.items.length).toBeGreaterThanOrEqual(0)
 
             let firstResult = results.items[0]
+            console.log("Details: ", firstResult)
             expect(firstResult.id).toBeDefined()
             expect(firstResult.snippet).toBeDefined()
         })
