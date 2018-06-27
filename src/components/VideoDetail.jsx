@@ -11,6 +11,8 @@ import Avatar from '@material-ui/core/Avatar';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 
+import Moment from 'react-moment';
+
 import VideoPropType from './proptypes/Video.js';
 
 /** Humanly readable numbers */
@@ -48,6 +50,7 @@ const styles = (theme) => ({
         margin: theme.spacing.unit
     },
     description: {
+        margin: `${theme.spacing.unit}px 0`,
         'white-space': 'pre-wrap',
     }
 })
@@ -89,6 +92,7 @@ class VideoDetail extends React.Component {
                 <Divider/>
                 <div className={classes.info}>
                     <Typography variant="button">{video.channelTitle}</Typography>
+                    <Typography variant="caption">Published on <Moment format='MMMM D, YYYY'>{video.publishetAt}</Moment></Typography>
                     <Typography className={classes.description}>{video.description}</Typography>
                 </div>
             </div>
