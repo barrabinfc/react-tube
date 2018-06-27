@@ -12,13 +12,19 @@ export const RelatedReducer = (state = {
             return {
                 ...state,
                 isSearching: true,
-                items: action.related
             }
         case RELATED_RESPONSE:
             return {
                 ...state,
                 isSearching: false,
-                items: action.related
+
+                /** Format data according to PropType */
+                items: action.related.items.map( (item) => {
+                    return {
+                        videoId: item.id.videoId,
+                        ...item.snippet
+                    }
+                })
             }
         default:
             return state

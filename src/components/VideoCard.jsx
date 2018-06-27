@@ -23,37 +23,60 @@ import VideoPropType from './proptypes/Video.js';
 const styles = (theme) => ({
     card: {
         display: 'flex',
-        cursor: 'pointer'
-        //padding:  theme.spacing.unit,
+        cursor: 'pointer',
+        transform: 'translate3d(0,0,0px)',
+        transition: theme.transitions.create(['box-shadow','transform'], {
+            easing: theme.transitions.easing.sharp,
+            duration: '0.15s',
+        }),          
+        '&:hover': {
+            transform: 'translate3d(0,0,20px)',
+        }
     },
     'content': {
-        flex: '1 0 auto',
+        flex: '1 0.25 auto',
+        'flex-wrap': 'wrap',
     },
     cover: {
+        flex: '1 0 auto',
         width: 155,
-        height: 155
+        height: 'calc(155px * 3/4)'
     }
 })
 
 /**
  * Video Card, display title, channel and thumbnail
  */
-export const VideoCard = (props) => {
-    const { video , classes } = props
-    return (
-      <Card onClick={props.onClick} className={classes.card}>
-        <CardMedia 
-                    className={classes.cover}
-                    image={video.thumbnail.default.url} 
-                    title={video.title} />
-        <CardContent className={classes.content}>
-            <Typography variant="headline">Live From Space</Typography>
-            <Typography variant="subheading" color="textSecondary">
-                Mac Miller
-            </Typography>
-        </CardContent>
-      </Card>
-    );
+class VideoCard extends React.Component {
+    state = {
+        hover: false,
+    }
+
+    mouseOver = (ev) => {  this.setState({hover: true})  }
+    mouseLeave = (ev) => { this.setState({hover: false}) }
+
+    render() {
+        const { video , classes , onClick} = this.props
+        
+        return (
+            <Card onMouseEnter={this.mouseOver} 
+                  onMouseLeave={this.mouseLeave}
+                  onClick={onClick} 
+                  className={classes.card} 
+                  raised={this.state.hover}>
+                <CardMedia 
+                            className={classes.cover}
+                            image={video.thumbnails.high.url} 
+                            title={video.title} />
+                <CardContent className={classes.content}>
+                    <Typography variant="body2">{video.title}</Typography>
+                    <Typography variant="caption" color="textSecondary">
+                        {video.channelTitle}
+                    </Typography>
+                </CardContent>
+            </Card>
+        );
+    }
 }
 
 VideoCard.propTypes = {

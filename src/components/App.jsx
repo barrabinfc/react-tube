@@ -10,13 +10,16 @@ import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import theme from '../styles/theme.js';
 
 import VideoPropType from './proptypes/Video.js'
 import MenuBar from './MenuBar.jsx';
+
 import Player from './Player.jsx';
+import VideoDetail from './VideoDetail.jsx';
+
 import VideosList from '../containers/VideosList.js'
 
 const drawerWidth = 420;
@@ -100,7 +103,7 @@ class App extends React.Component {
         <div className={classes.drawerHeader}>
           <Typography variant="title" color="inherit" noWrap>Suggestions: </Typography>
           <IconButton onClick={this.handleDrawerClose}>
-            <ChevronLeftIcon />
+            <ChevronRightIcon />
           </IconButton>
         </div>
 
@@ -130,6 +133,7 @@ class App extends React.Component {
               [classes['contentShift-right']]: drawerOpen
             })}>
                 <Player videoId={this.props.player.videoId} />
+                <VideoDetail video={this.props.player} />
             </article>
 
             {this.drawer()}

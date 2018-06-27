@@ -5,7 +5,7 @@ export const MockVideoData = {
     description: `Erik Satie - Gymnopédie No.1`,
     channelTitle:      'Estoy Perdida',
     channelId:         '',        
-    thumbnail:   {
+    thumbnails:   {
         'default': {url: 'https://img.youtube.com/vi/_fuIMye31Gw/0.jpg'},
         'hight':   {url: 'https://img.youtube.com/vi/_fuIMye31Gw/0.jpg'},
         'medium':  {url: 'https://img.youtube.com/vi/_fuIMye31Gw/1.jpg'}

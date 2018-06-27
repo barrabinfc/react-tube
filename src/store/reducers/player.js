@@ -10,6 +10,12 @@ export const PlayerReducer = (state = {
     ...{isLoading:  false, videoId:    false},
 }, action ) => {
     switch(action.type) {
+        case CLEAR:
+            return {
+                ...MockVideoData,
+                
+                isLoading: false,
+            }
         case DETAILS_REQUEST:
             return {
                 ...state,

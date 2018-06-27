@@ -1,5 +1,7 @@
 import { details as YoutubeDetails } from '../../api/youtube'
 
+import RelatedActions from './related.js'
+
 export const CLEAR                  = 'PLAYER_CLEAR'
 export const GOTO                   = 'PLAYER_GOTO'
 export const DETAILS_REQUEST        = 'PLAYER_DETAILS_REQUEST'
@@ -14,6 +16,10 @@ class PlayerActions {
     /** Async Search for `subject` in youtube */
     goto = (videoId) => (dispatch) => { 
         dispatch(this._detailsRequest(videoId))
+        
+        // also trigger related search
+        dispatch(RelatedActions.relatedOf(videoId))
+
         return YoutubeDetails( videoId )
                 .then(json => dispatch(this._detailsResponse(videoId, json)))
     }

@@ -16,7 +16,7 @@ const VideoPropType = PropTypes.shape({
     description:      PropTypes.string.isRequired,
     channelTitle:     PropTypes.string.isRequired,
     channelId:        PropTypes.string.isRequired,
-    thumbnail: PropTypes.shape({
+    thumbnails: PropTypes.shape({
       default:  ThumbnailPropType,
       medium:   ThumbnailPropType,
       high:     ThumbnailPropType

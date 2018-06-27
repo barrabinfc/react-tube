@@ -1,7 +1,7 @@
 import { searchRelatedOf as YoutubeRelated } from '../../api/youtube'
 
-export const RELATED_REQUEST      = 'SEARCH_REQUEST'
-export const RELATED_RESPONSE     = 'SEARCH_RESPONSE'
+export const RELATED_REQUEST      = 'RELATED_REQUEST'
+export const RELATED_RESPONSE     = 'RELATED_RESPONSE'
 
 class RelatedActions {
 

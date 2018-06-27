@@ -11,6 +11,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
 
 import VideoCard from './VideoCard.jsx';
 import VideoPropType from './proptypes/Video.js';
@@ -19,7 +20,12 @@ import { MockVideoData } from '../mock/index.js';
 
 const styles = (theme) => ({
     container: {
+        'perspective': '800px'
     },
+    notfound: {
+        padding: '1em',
+        'text-align': 'center'
+    }
 })
 
 
@@ -30,21 +36,19 @@ class VideosList extends React.Component {
     cardClick = (videoId) => {
         this.props.onSelect( videoId )
     }
-    
-    list() {
-        return (
-            <div>
-                <ListItem>
-                    <VideoCard onClick={() => this.cardClick(MockVideoData.videoId)} video={MockVideoData} />
-                </ListItem>
-                <ListItem>
-                    <VideoCard onClick={() => this.cardClick(MockVideoData.videoId)} video={MockVideoData} />
-                </ListItem>
-                <ListItem>
-                    <VideoCard onClick={() => this.cardClick(MockVideoData.videoId)} video={MockVideoData} />
-                </ListItem>
 
-            </div>      
+    empty = () => {
+        const {classes} = this.props
+
+        return <Typography className={classes.notfound} variant="display1">No suggestions :(</Typography>
+    }
+    
+    item( data , i ) {
+        console.log("rendering listitem ", i, data)
+        return (
+            <ListItem key={i}>
+                <VideoCard onClick={() => this.cardClick(data.videoId)} video={data} />
+            </ListItem>
         )
     }
 
@@ -52,17 +56,18 @@ class VideosList extends React.Component {
         const { classes } = this.props
 
         return (
-            <List className={classes.container}>
-                {this.list()}
-            </List>
+            (this.props.items.length == 0 ? this.empty() : 
+                <List className={classes.container}>
+                    {this.props.items.map( (videoData,i)  => this.item(videoData,i) )} 
+                </List>
+            )
         )
     }
 }
 
 VideosList.propTypes = {
     classes: PropTypes.object.isRequired,
-    videoId: PropTypes.string.isRequired,
-    list: PropTypes.arrayOf(
+    items: PropTypes.arrayOf(
         VideoPropType
     ),
     onSelect: PropTypes.func.isRequired
