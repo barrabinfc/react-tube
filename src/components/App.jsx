@@ -69,7 +69,11 @@ class App extends React.Component {
 
   handleDrawerOpen  = () => { this.setState({drawerOpen: true})  }
   handleDrawerClose = () => { this.setState({drawerOpen: false}) }
+  handleDrawerToggle = () => {
+    this.setState({drawerOpen: !this.state.drawerOpen})
+  }
 
+  /** Drawer */
   drawer(){
     const { classes } = this.props
     
@@ -105,7 +109,7 @@ class App extends React.Component {
         <React.Fragment>
           <CssBaseline />
 
-          <MenuBar onHamburguerClick={this.handleDrawerOpen} />
+          <MenuBar onHamburguerClick={this.handleDrawerToggle} />
           
           <section className={classes.root}>
 
