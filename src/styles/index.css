@@ -1,4 +1,15 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif; }
+  font-family: sans-serif; 
+}
+
+@keyframes moving-gradient {
+  from {
+      background-position: left bottom;
+  }
+
+  to {
+      background-position: right bottom;
+  }
+}

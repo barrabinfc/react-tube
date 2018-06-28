@@ -7,6 +7,8 @@ const state2props = (state) => {
   return {
       player: state.player,
       related: state.related,
+      
+      isLoading: state.player.isLoading
   }
 }
 

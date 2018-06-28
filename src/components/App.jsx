@@ -65,7 +65,31 @@ const styles = theme => ({
   },
   'contentShift-right': {
     'margin-right': 0
-  }  
+  },
+
+  /** Loading indicator */
+  'loadIndicator': {
+    position: 'absolute',
+    top: '0px',
+    width: '100%',
+    display: 'block',
+    height: theme.spacing.unit,
+
+    'z-index': 10000,
+    'opacity': 0,
+    'background': 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 80%, #FE6B8B 100%) repeat' ,
+    'background-size': '50% 100%',
+    'animation': 'moving-gradient 2s linear infinite', 
+
+    'transition': theme.transitions.create('opacity', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),    
+    
+  },
+  'isLoading': {
+    'opacity': 1
+  }
 })
 
 class App extends React.Component {
@@ -78,17 +102,6 @@ class App extends React.Component {
   handleDrawerToggle = () => {
     this.setState({drawerOpen: !this.state.drawerOpen})
   }
-
-  /** For testing purposes 
-  myDefaultAction = (event) => {
-    event.preventDefault()
-    event.stopPropagation()
-
-    console.log("App.jsx defaultAction: ", this.props)
-    (this.props.onDefaultAction && this.props.onDefaultAction() )
-  }
-  */
-
 
   /** Drawer */
   drawer(){
@@ -119,7 +132,7 @@ class App extends React.Component {
 
   render() {
     const { drawerOpen } = this.state
-    const { classes } = this.props;
+    const { classes , isLoading } = this.props;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -132,6 +145,10 @@ class App extends React.Component {
                    onVideoSelect={this.props.onVideoSelect} />
           
           <section className={classes.root}>
+
+            <div className={classNames(classes.loadIndicator, {
+              [classes['isLoading']]: isLoading
+            })} ></div>
 
             <article className={classNames(classes.content, classes[`content-right`], {
               [classes['contentShift']]: drawerOpen,
@@ -153,6 +170,7 @@ class App extends React.Component {
 
 App.propTypes = {
     classes:          PropTypes.object.isRequired,
+    isLoading:        PropTypes.bool.isRequired,
     player:           VideoPropType.isRequired,
     onDefaultAction:  PropTypes.func.isRequired,
     onVideoSelect:    PropTypes.func.isRequired
