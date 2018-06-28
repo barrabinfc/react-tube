@@ -44,7 +44,7 @@ class VideosList extends React.Component {
     
     item( data , i ) {
         return (
-            <Grow in={true} key={i} timeout={i*233}>
+            <Grow in={true} key={i} timeout={i*333}>
                 <ListItem key={i}>
                         <VideoCard onClick={() => this.cardClick(data.videoId)} video={data} />
                 </ListItem>

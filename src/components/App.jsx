@@ -127,7 +127,8 @@ class App extends React.Component {
           <CssBaseline />
 
           <MenuBar onHamburguerClick={this.handleDrawerToggle} 
-                   onNotificationClick={this.props.onDefaultAction} />
+                   onNotificationClick={this.props.onDefaultAction} 
+                   onVideoSelect={this.props.onVideoSelect} />
           
           <section className={classes.root}>
 
@@ -150,9 +151,10 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    classes: PropTypes.object.isRequired,
-    player:  VideoPropType.isRequired,
-    onDefaultAction: PropTypes.func.isRequired
+    classes:          PropTypes.object.isRequired,
+    player:           VideoPropType.isRequired,
+    onDefaultAction:  PropTypes.func.isRequired,
+    onVideoSelect:    PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(App);

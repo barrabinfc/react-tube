@@ -10,7 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountIcon from '@material-ui/icons/AccountCircle';
 import NotificationIcon from '@material-ui/icons/Notifications';
 
-import SearchBar from '../containers/SearchBar.js';
+import SearchBar from './SearchBar.jsx';
 import logo from '../assets/logo.svg';
 
 const styles = {
@@ -45,7 +45,6 @@ class MenuBar extends React.Component {
     render(){
         const { classes } = this.props;
         return (
-            //<div className={classes.root}>
                 <AppBar color="default"> 
                     {//position="static" color="default">
                     }
@@ -57,22 +56,22 @@ class MenuBar extends React.Component {
                             </IconButton>
                             <img src={logo} className={classes.logo} alt="logo" />
                         </div>
-                        <SearchBar />
+                        <SearchBar onVideoSelect={this.props.onVideoSelect} />
                         <div className={classes.end}>
                             <IconButton onClick={this.props.onNotificationClick}><NotificationIcon /></IconButton>
                             <IconButton ><AccountIcon /></IconButton>
                         </div>
                     </Toolbar>
                 </AppBar>
-            //</div>
         );
     }
 }
 
 MenuBar.propTypes = {
-    classes:            PropTypes.object.isRequired,
-    onHamburguerClick:  PropTypes.func.isRequired,
-    onNotificationClick: PropTypes.func
+    classes:                PropTypes.object.isRequired,
+    onHamburguerClick:      PropTypes.func.isRequired,
+    onNotificationClick:    PropTypes.func,
+    onVideoSelect:          PropTypes.func
 };
 
 export default withStyles(styles)(MenuBar);
