@@ -79,7 +79,7 @@ const styles = theme => ({
     'opacity': 0,
     'background': 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 80%, #FE6B8B 100%) repeat' ,
     'background-size': '50% 100%',
-    'animation': 'moving-gradient 2s linear infinite', 
+    'animation': 'moving-gradient 1.33s linear infinite', 
 
     'transition': theme.transitions.create('opacity', {
       easing: theme.transitions.easing.easeOut,

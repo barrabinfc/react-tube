@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 
-import { SearchReducer } from './search.js'
+//import { SearchReducer } from './search.js'
 import { PlayerReducer } from './player.js'
 import { RelatedReducer } from './related.js'
 
 const rootReducer = combineReducers({
-    'search': SearchReducer,
+    //'search': SearchReducer,
     'player': PlayerReducer,
     'related': RelatedReducer
 })
