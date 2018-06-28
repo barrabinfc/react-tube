@@ -127,7 +127,8 @@ class App extends React.Component {
           <CssBaseline />
 
           <MenuBar onHamburguerClick={this.handleDrawerToggle} 
-                   onNotificationClick={this.props.onDefaultAction} 
+                   onNotificationClick={this.props.onDefaultAction}
+                   onLogoClick={this.props.onDefaultAction} 
                    onVideoSelect={this.props.onVideoSelect} />
           
           <section className={classes.root}>

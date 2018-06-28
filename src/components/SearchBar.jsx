@@ -1,29 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import update from 'immutability-helper';
 import Downshift from 'downshift';
 
 import { withStyles } from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import IconButton from '@material-ui/core/IconButton';
-import FormControl from '@material-ui/core/FormControl';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText'
-import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 import Fade from '@material-ui/core/Fade';
 
 import SearchIcon from '@material-ui/icons/Search';
 
 import {search} from '../api/youtube.js'
-import VideoPropType from './proptypes/Video.js'
 
 
 const styles = theme => ({
@@ -65,11 +59,11 @@ function renderSuggestion({ suggestion, index, itemProps, highlightedIndex, sele
     const isHighlighted = highlightedIndex === index;
     const isSelected = (selectedItem || '').indexOf(suggestion.title) > -1;
     return (
-        <MenuItem className={classes.menuItem} {...itemProps}
+        <MenuItem {...itemProps}
             key={suggestion.videoId}
             selected={isHighlighted}
             component="div">
-                <Avatar className={classes.avatar} src={suggestion.thumbnails.default.url} />
+                <Avatar src={suggestion.thumbnails.default.url} />
                 <ListItemText primary={suggestion.title} style={{
                     fontWeight: isSelected ? 500 : 400 
                 }}/>
@@ -96,6 +90,16 @@ class SearchBar extends React.Component {
         selected: undefined
     };
 
+    /** Get videoId of `subject` stored in items */
+    getVideoIdOf = ( subject ) => {
+        
+        let videosMatching = this.state.items.filter( (item) => 
+            (item.title.toLowerCase() === subject.toLowerCase())
+        ).map(item => item.videoId)
+
+        if(videosMatching) return videosMatching[0]
+    }
+
     searchIconClick = event => {
         event.preventDefault()
 
@@ -118,30 +122,35 @@ class SearchBar extends React.Component {
         let subject = event.target.value.trim()
         
         if(!subject) return
-        this.setState( {subject: event.target.value})
+
+        this.setState( {subject: subject})
         this.searchForVideo(subject)
     }
     
-    onSelectedSuggestion = ( videoId ) => {        
-        this.setState({selected: videoId})
-        this.props.onVideoSelect(this.state.selected)
+    onSelectedSuggestion = ( selection , what ) => { 
+        console.log("Selected Suggestion", selection)
+        let suggestedVideoId = this.getVideoIdOf(selection)
+        console.log("Suggestion id: ", suggestedVideoId)
+
+        this.setState({selected: suggestedVideoId})
+        this.props.onVideoSelect( suggestedVideoId )
     }
 
     /** Filter top 5 suggestions */
     filterSuggestions = (inputValue) => {
         let count = 0;
-      
+
+        console.log("Search length: ", this.state.items.length)
         return this.state.items.filter(suggestion => {
-          const shouldKeep = (!inputValue || 
-                            suggestion.title.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) 
-                            && count < 5;
+          const shouldKeep = (count < 5);
+                            //suggestion.title.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) 
+                            //&& count < 5;
       
           if (shouldKeep)
             count += 1;
       
           return shouldKeep;
         });
-        console.log("Items length: ", this.state.items.length)
     }
       
 
@@ -161,7 +170,7 @@ class SearchBar extends React.Component {
                         },
                         endAdornment: (
                             <InputAdornment position="end">
-                                <IconButton onClick={this.onSelectedSuggestion}><SearchIcon /></IconButton>
+                                <IconButton onClick={this.searchIconClick}><SearchIcon /></IconButton>
                             </InputAdornment>
                         ),
                         ...InputProps,
@@ -183,8 +192,8 @@ class SearchBar extends React.Component {
                                                fullWidth: true,
                                                InputProps: getInputProps({
                                                     onChange:       this.onChange,
-                                                    placeholder:    'Search a country (start with a)',
-                                                    id:             'integration-downshift-simple',
+                                                    placeholder:    'Search a album',
+                                                    id:             'integration-downshift',
                                                })
                             })}                            
                             {isOpen ? (
@@ -194,7 +203,10 @@ class SearchBar extends React.Component {
                                             renderSuggestion({
                                                 suggestion,
                                                 index,
-                                                itemProps: getItemProps({ item: suggestion.title }),
+                                                itemProps: getItemProps(
+                                                    { item: suggestion.title ,
+                                                      key:  suggestion.videoId
+                                                    }),
                                                 highlightedIndex,
                                                 selectedItem,
                                                 classes

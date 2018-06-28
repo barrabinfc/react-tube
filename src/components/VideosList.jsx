@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import update from 'immutability-helper';
-
 import { withStyles } from '@material-ui/core/styles';
 
 import List from '@material-ui/core/List';
@@ -14,8 +12,6 @@ import Typography from '@material-ui/core/Typography';
 
 import VideoCard from './VideoCard.jsx';
 import VideoPropType from './proptypes/Video.js';
-
-import { MockVideoData } from '../mock/index.js';
 
 const styles = (theme) => ({
     container: {
@@ -56,7 +52,7 @@ class VideosList extends React.Component {
         const { classes } = this.props
 
         return (
-            (this.props.items.length == 0 ? this.empty() : 
+            (this.props.items.length === 0 ? this.empty() : 
                 <List className={classes.container}>
                     {this.props.items.map( (videoData,i)  => this.item(videoData,i) )} 
                 </List>

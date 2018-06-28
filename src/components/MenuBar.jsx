@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountIcon from '@material-ui/icons/AccountCircle';
@@ -46,15 +47,17 @@ class MenuBar extends React.Component {
         const { classes } = this.props;
         return (
                 <AppBar color="default"> 
-                    {//position="static" color="default">
-                    }
                     <Toolbar className={classes.toolbar}>
                         <div className={classes.start}>
                             <IconButton className={classes.menuButton} 
                                         onClick={this.props.onHamburguerClick} aria-label="Menu">
                                 <MenuIcon />
                             </IconButton>
-                            <img src={logo} className={classes.logo} alt="logo" />
+                            <Tooltip title="Go to a random album" placement="bottom">
+                                <a href="" onClick={this.props.onLogoClick}>
+                                    <img src={logo} className={classes.logo} alt="logo" />
+                                </a>
+                            </Tooltip>
                         </div>
                         <SearchBar onVideoSelect={this.props.onVideoSelect} />
                         <div className={classes.end}>
@@ -71,6 +74,7 @@ MenuBar.propTypes = {
     classes:                PropTypes.object.isRequired,
     onHamburguerClick:      PropTypes.func.isRequired,
     onNotificationClick:    PropTypes.func,
+    onLogoClick:            PropTypes.func,
     onVideoSelect:          PropTypes.func
 };
 
